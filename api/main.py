@@ -37,7 +37,9 @@ if is_development:
                 api_subdirs.append(item_path)
         
         # Also add Python files in the api root directory
-        api_subdirs.append(current_dir + "/*.py")
+        # Maybe this not support for the future version of watchfiles
+        # api_subdirs.append(current_dir + "/*.py")
+        api_subdirs.append(current_dir)
         
         return original_watch(*api_subdirs, **kwargs)
     watchfiles.watch = patched_watch
