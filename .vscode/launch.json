@@ -2,18 +2,75 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Deepwiki-Open",
-            "type": "python",
+            "name": "Deepwiki-Open (Backend)",
+            "type": "debugpy",
             "request": "launch",
-            "module": "uvicorn",
-            "args": [
-                "api.api:app",
-                "--reload",
-                "--port",
-                "8001"
-            ],
+            "module": "api.main",
+            "python": "C:\\Users\\plowa\\AppData\\Local\\pypoetry\\Cache\\virtualenvs\\open-deepwiki-api-PgXqcUuL-py3.14\\Scripts\\python.exe",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "NODE_ENV": "development"
+            },
             "jinja": true,
             "justMyCode": true
+        },
+        {
+            "name": "Deepwiki-Open (Frontend - Dev Server)",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "dev"],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "env": {
+                "NODE_ENV": "development"
+            }
+        },
+        {
+            "name": "Deepwiki-Open (Frontend - Chrome Debug)",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": {
+                "webpack://_N_E/*": "${webRoot}/*",
+                "webpack:///./*": "${webRoot}/*",
+                "webpack:///./~/*": "${webRoot}/node_modules/*"
+            }
+        },
+        {
+            "name": "Deepwiki-Open (Frontend - Edge Debug)",
+            "type": "msedge",
+            "request": "launch",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": {
+                "webpack://_N_E/*": "${webRoot}/*",
+                "webpack:///./*": "${webRoot}/*",
+                "webpack:///./~/*": "${webRoot}/node_modules/*"
+            }
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Deepwiki-Open (Full Stack)",
+            "configurations": [
+                "Deepwiki-Open (Backend)",
+                "Deepwiki-Open (Frontend - Dev Server)"
+            ],
+            "stopAll": true
+        },
+        {
+            "name": "Deepwiki-Open (Backend + Chrome Debug)",
+            "configurations": [
+                "Deepwiki-Open (Backend)",
+                "Deepwiki-Open (Frontend - Chrome Debug)"
+            ],
+            "stopAll": true,
+            "preLaunchTask": "Start Frontend Dev Server"
         }
     ]
 }
